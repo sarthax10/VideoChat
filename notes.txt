@@ -1,0 +1,22 @@
+Q. What is WebRTC?
+-> WebRRTC is a set of JavaScript API's that allows us to establish peer to peer connection between two browsers to exchange data such as audio and video in real time.
+-> Real Time Communication
+-> Lower Latency
+-> It's different from WebSockets as WebSockets achieve real time communication through a server (peer to server) and WebRTC uses the browser, data never touches the server.
+-> WebRTC transports it's data over UDP (UDP is fast).
+    -> UDP is not reliable protocol for transferring important data. It sends data fast but never checks if data has reached or not.
+    -> There is no built in signaling in WebRTC, so we have to make the initial connection on our own and then WebRTC will takeover.
+
+Q. What is being sent beetween the two clients and how is it sent?
+-> Both the peers need to exchange a Session Description Protocol (SDP), one in the form of an offer and one in the form of an answer
+-> SDP is an object containing some description about both peers.
+-> In addition to the SDP, both clients will share a seriese of ICE candidates.
+-> An ICE candidate is a public IP address and port that could potentially be an address that recieves data.
+
+Q. Elaborate on exchanging SDP and ICE candidate.
+-> First obe browser will send it's SDP to a server and the server will send that to the other browser and will recieve a response contaaining it's SDP.
+-> Now the connection between both the peers has been established but the the data can't flow between the clients.
+-> As most devices sit behind firewalls and NAT devices, we need to coordinnate the discovery of our public IP addresses for the data to start  flowing.
+-> We do this using a method called ICE. 
+-> One client will ask the STUN server about it's public IP address and it will send it to the otheer client using a seriese of ICE candidates. The other client will recieve these ICE candidates and it will do the same.
+-> Once the network finds the optimal path to communicate through, data will start flowing and the entire connection is complete.
